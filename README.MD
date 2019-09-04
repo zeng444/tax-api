@@ -1,3 +1,6 @@
+#  税务对接 SDK
+
+## 初始化客户端
 ```
 $opt= [
   'connectTimeout' => 1,
@@ -14,7 +17,11 @@ $client = new HttpClient([
     'gatewayUrl' => $gatewayUrl,
     'rsaPubPath' => DEMO_PATH.'/key/rsa_public_key.pem',
 ]);
+```
+## 服务调用
 
+###  获取token 
+```
 $token = new TokenService();
 $result = $client->execute($token);
 if (!$result->isSuccess()) {
@@ -24,5 +31,6 @@ if (!$result->isSuccess()) {
 }
 $data = $result->getData();
 echo $data->token ?? '';
-
 ```
+
+###  ...
