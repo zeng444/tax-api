@@ -1,0 +1,21 @@
+{
+  "name": "janfish/tax-api",
+  "description": "Tax Reporting Interface",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Robert",
+      "email": "robert@janfish.cn"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "ext-curl": "*",
+    "php": ">=7.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tax\\": "src/"
+    }
+  }
+}
