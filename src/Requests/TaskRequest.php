@@ -234,30 +234,6 @@ class TaskRequest extends BaseRequest implements RequestInterface
 
 
     /**
-     * 发布方订单原始编号
-     * Author:Robert
-     *
-     * @param string $id
-     */
-    public function setSourceId(string $id)
-    {
-        $this->params['ddbh'] = $this->sourceId = $id;
-    }
-
-
-    /**
-     * 订单唯一标识
-     * Author:Robert
-     *
-     * @param string $uuid
-     * @param string $prefix 如果相关uuid为数字，需要增加平台缩写作为前缀
-     */
-    public function setUUID(string $uuid, string $prefix = '')
-    {
-        $this->params['dduuid'] = $this->uuid = $prefix.$uuid;
-    }
-
-    /**
      * 发布方负责人姓名
      * Author:Robert
      *
@@ -303,16 +279,31 @@ class TaskRequest extends BaseRequest implements RequestInterface
 
 
     /**
+     * 订单唯一标识
+     * Author:Robert
+     *
+     * @param string $uuid
+     * @param string $prefix 如果相关uuid为数字，需要增加平台缩写作为前缀
+     */
+    public function setUUID(string $uuid, string $prefix = '')
+    {
+        $this->params['dduuid'] = $this->uuid = $prefix.$uuid;
+    }
+
+
+    /**
      * 任务基本信息
      * Author:Robert
      *
+     * @param string $id 订单原始编号
      * @param string $title 任务标题
      * @param string $desc 任务描述
      * @param string $industry 服务所属行业类别 （软件编程、3D制图、平面设计、兼职销售、包装设计等）
      * @param string $industryCode 所属行业编码 参见《行业代码-名称表》
      */
-    public function setBasicInfo(string $title, string $desc, string $industry, string $industryCode)
+    public function setBasicInfo(string $id, string $title, string $desc, string $industry, string $industryCode)
     {
+        $this->params['ddbh'] = $this->sourceId = $id;
         $this->params['hwmc'] = $this->title = $title;
         $this->params['rwms'] = $this->desc = $desc;
         $this->params['hwsshy'] = $this->industryCode = $industryCode;
@@ -385,7 +376,7 @@ class TaskRequest extends BaseRequest implements RequestInterface
      * @param string $mac 服务方电脑mac地址或者手机设备号
      * @throws \Exception
      */
-    public function setHirerReceiveInfo(string $date, string $cityCode, string $device, string $ip, string $mac)
+    public function setHirerAcceptInfo(string $date, string $cityCode, string $device, string $ip, string $mac)
     {
         if (!in_array($device, ['PC', 'MOBILE'])) {
             throw new \Exception('发布设备填写不合法');
@@ -408,7 +399,7 @@ class TaskRequest extends BaseRequest implements RequestInterface
      * @param string $date 订单最终结算时间
      * @param string $performanceRatio 绩效系数(搞不懂是啥)
      */
-    public function setSettle(string $fee, string $unitPrice, string $total, string $platformPoundage, string $date, string $performanceRatio = '')
+    public function setSettleInfo(string $fee, string $unitPrice, string $total, string $platformPoundage, string $date, string $performanceRatio = '')
     {
         $this->params['fbfddje'] = $this->fee = $fee;
         $this->params['fwfjsdj'] = $this->unitPrice = $unitPrice;
@@ -428,9 +419,9 @@ class TaskRequest extends BaseRequest implements RequestInterface
      * @param string $cityCode 发布地点 参见《行政区划代码-名称表》
      * @throws \Exception
      */
-    public function setPublish(string $publishDevice, string $publishDate, string $cityCode)
+    public function setPublishInfo(string $publishDevice, string $publishDate, string $cityCode)
     {
-        if (!in_array($publishDate, ['PC', 'MOBILE'])) {
+        if (!in_array($publishDevice, ['PC', 'MOBILE'])) {
             throw new \Exception('发布设备填写不合法');
         }
         $this->params['fdfs'] = $this->publishDevice = $publishDevice;
@@ -446,9 +437,13 @@ class TaskRequest extends BaseRequest implements RequestInterface
      * @param string $startDate 服务方起始服务时间
      * @param string $endDate 服务方结束服务时间
      * @param string $timeUnit 时间单位
+     * @throws \Exception
      */
     public function setDuration(string $startDate, string $endDate, $timeUnit = '天')
     {
+        if (!$startDate || !$endDate) {
+            throw new \Exception('设置任务时间进度信息不能为空');
+        }
         $this->params['qsfwsj'] = $this->startDate = $startDate;
         $this->params['jsfwsj'] = $this->endDate = $endDate;
         $diff = date_diff(date_create($startDate), date_create($endDate));
