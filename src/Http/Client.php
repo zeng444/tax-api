@@ -197,6 +197,7 @@ class Client
     {
         $data = $this->getTokenFromCache();
         if (!$data) {
+            echo "Request Token".PHP_EOL;
             $tokenRequest = new TokenRequest();
             $response = $this->execute($tokenRequest);
             if (!$response->isSuccess()) {
@@ -226,7 +227,6 @@ class Client
             $result->status = ResultSet::ERROR_STATUS;
             return $result;
         }
-
         $nodeName = $request->getNodeName();
         $postFields = $nodeName ? [$nodeName => $request->getBody()] : $request->getBody();
         $postFields = array_merge($postFields, [

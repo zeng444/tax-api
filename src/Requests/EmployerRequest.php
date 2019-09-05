@@ -1,15 +1,15 @@
 <?php
 
-namespace Tax\Services;
+namespace Tax\Requests;
 
 /**
  * 发布方
  * Author:Robert
  *
- * Class EmployerService
- * @package Tax\Services
+ * Class EmployerRequest
+ * @package Tax\Requests
  */
-class EmployerService extends BaseService implements ServiceInterface
+class EmployerRequest extends BaseRequest implements RequestInterface
 {
 
     /**
@@ -115,6 +115,16 @@ class EmployerService extends BaseService implements ServiceInterface
     public function getServiceId(): string
     {
         return 'postFbfxx0001';
+    }
+
+    /**
+     * Author:Robert
+     *
+     * @return string
+     */
+    public function getNodeName(): string
+    {
+        return 'fbfjbxx';
     }
 
     /**
