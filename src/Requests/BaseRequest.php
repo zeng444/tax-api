@@ -9,7 +9,7 @@ namespace Tax\Requests;
  * Class Token
  * @package Tax\Requests
  */
-abstract class BaseRequest implements RequestInterface
+abstract class BaseRequest
 {
 
     /**
