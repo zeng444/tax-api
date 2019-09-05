@@ -2,7 +2,8 @@
 
 namespace Tax\Http;
 
-use Tax\Services\ServiceInterface;
+use Tax\Requests\RequestInterface;
+use Tax\Requests\TokenRequest;
 
 
 class Client
@@ -140,15 +141,28 @@ class Client
         return md5(uniqid(true));
     }
 
+    /**
+     * Author:Robert
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function getToken(): string
+    {
+        $tokenRequest = new TokenRequest();
+        $response = $this->execute($tokenRequest);
+        print_r($response);
+        die();
+    }
 
     /**
      * Author:Robert
      *
-     * @param ServiceInterface $request
+     * @param RequestInterface $request
      * @return \Tax\Http\ResultSet
      * @throws \Exception
      */
-    public function execute(ServiceInterface $request): ResultSet
+    public function execute(RequestInterface $request): ResultSet
     {
         $result = new ResultSet();
         try {
@@ -159,7 +173,8 @@ class Client
             $result->status = ResultSet::ERROR_STATUS;
             return $result;
         }
-        $postFields = $request->getBody();
+        $nodeName = $request->getNodeName();
+        $postFields = $nodeName ? [$nodeName => $request->getBody()] : $request->getBody();
         $postFields = array_merge($postFields, [
             'service_id' => $request->getServiceId(),
             'system_id' => $this->systemId,
@@ -169,7 +184,9 @@ class Client
             'timestamp' => (string)time(),
             'version' => $this->version,
         ]);
-
+        if ($request->requireToken()) {
+            $postFields['token'] = $this->getToken();
+        }
         try {
             $resp = $this->httpPost($this->gatewayUrl.$request->getServiceId(), $postFields ? json_encode($postFields) : '');
         } catch (\Exception $e) {

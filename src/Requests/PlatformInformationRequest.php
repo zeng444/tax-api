@@ -1,15 +1,15 @@
 <?php
 
-namespace Tax\Services;
+namespace Tax\Requests;
 
 /**
  * 平台企业基础信息接口
  * Author:Robert
  *
- * Class Token
- * @package Tax\Services
+ * Class PlatformInformationRequest
+ * @package Tax\Requests
  */
-class PlatformInformationService extends BaseService implements ServiceInterface
+class PlatformInformationRequest extends BaseRequest implements RequestInterface
 {
 
 
@@ -198,6 +198,16 @@ class PlatformInformationService extends BaseService implements ServiceInterface
     public function getServiceId(): string
     {
         return 'postPtxx0001';
+    }
+
+    /**
+     * Author:Robert
+     *
+     * @return string
+     */
+    public function getNodeName(): string
+    {
+        return 'ptjbxx';
     }
 
 

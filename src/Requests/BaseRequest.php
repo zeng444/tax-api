@@ -1,15 +1,15 @@
 <?php
 
-namespace Tax\Services;
+namespace Tax\Requests;
 
 /**
  * 获取Token服务
  * Author:Robert
  *
  * Class Token
- * @package Tax\Services
+ * @package Tax\Requests
  */
-abstract class BaseService implements ServiceInterface
+abstract class BaseRequest implements RequestInterface
 {
 
     /**
@@ -36,6 +36,16 @@ abstract class BaseService implements ServiceInterface
     /**
      * Author:Robert
      *
+     * @return string
+     */
+    public function getNodeName(): string
+    {
+        return '';
+    }
+
+    /**
+     * Author:Robert
+     *
      * @return bool
      */
     public function validate(): bool
@@ -46,11 +56,11 @@ abstract class BaseService implements ServiceInterface
     /**
      * Author:Robert
      *
-     * @param string $token
+     * @return bool
      */
-    public function setToken(string $token)
+    public function requireToken(): bool
     {
-        $this->params['token'] = $this->token = $token;
+        return true;
     }
 
 }

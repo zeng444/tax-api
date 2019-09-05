@@ -1,16 +1,32 @@
 <?php
 
-namespace Tax\Services;
+namespace Tax\Requests;
 
 /**
  * 服务方
  * Author:Robert
  *
- * Class HirerService
- * @package Tax\Services
+ * Class HirerRequest
+ * @package Tax\Requests
  */
-class HirerService extends BaseService implements ServiceInterface
+class HirerRequest extends BaseRequest implements RequestInterface
 {
+
+    /**
+     * @var
+     */
+    public $companyName;
+
+    /**
+     * @var
+     */
+    public $companyLicenseNo;
+
+    /**
+     * @var
+     */
+    public $companyAddress;
+
 
     /**
      * @var
@@ -176,9 +192,16 @@ class HirerService extends BaseService implements ServiceInterface
         return 'postFwfxx0001';
     }
 
-    public $companyName;
-    public $companyLicenseNo;
-    public $companyAddress;
+    /**
+     * Author:Robert
+     *
+     * @return string
+     */
+    public function getNodeName(): string
+    {
+        return 'fwfjbxx';
+    }
+
 
     /**
      * 注册会员所在企业信息
