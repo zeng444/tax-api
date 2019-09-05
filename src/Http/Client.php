@@ -75,6 +75,11 @@ class Client
     private $_sign;
 
     /**
+     * @var
+     */
+    private $cacheFile;
+
+    /**
      *
      */
     const HTTP_USER_AGENT = 'H.Y.D Bot V0.01';
@@ -103,6 +108,9 @@ class Client
         }
         if (isset($options['logFile'])) {
             $this->logFile = $options['logFile'];
+        }
+        if (isset($options['cacheFile'])) {
+            $this->cacheFile = $options['cacheFile'];
         }
         $this->_sign = new Sign($options);
     }
@@ -144,15 +152,60 @@ class Client
     /**
      * Author:Robert
      *
+     * @return bool|mixed
+     */
+    protected function getTokenFromCache()
+    {
+        if (!$this->cacheFile || !file_exists($this->cacheFile)) {
+            return false;
+        }
+        $cache = @file_get_contents($this->cacheFile);
+        if (!$cache) {
+            return false;
+        }
+        $data = unserialize($cache);
+        $token = $data->token ?? '';
+        $expiresAt = $data->expires_at ?? '';
+        if (!$token || !$expiresAt || time() > strtotime($data->expires_at) - 3600) {
+            return false;
+        }
+        return $data;
+    }
+
+    /**
+     * Author:Robert
+     *
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    protected function setTokenToCache($data)
+    {
+        if ($this->cacheFile && !@file_put_contents($this->cacheFile, serialize($data))) {
+            throw new \Exception('无法写入token cache，请检查'.$this->cacheFile.'可写入');
+        }
+        return true;
+    }
+
+    /**
+     * Author:Robert
+     *
      * @return string
      * @throws \Exception
      */
     protected function getToken(): string
     {
-        $tokenRequest = new TokenRequest();
-        $response = $this->execute($tokenRequest);
-        print_r($response);
-        die();
+        $data = $this->getTokenFromCache();
+        if (!$data) {
+            $tokenRequest = new TokenRequest();
+            $response = $this->execute($tokenRequest);
+            if (!$response->isSuccess()) {
+                throw new \Exception('['.$response->getCode().']'.$response->getMessage(), $response->getCode());
+            }
+            $data = $response->getData();
+            $this->setTokenToCache($data);
+        }
+        return $data->token;
     }
 
     /**
@@ -173,6 +226,7 @@ class Client
             $result->status = ResultSet::ERROR_STATUS;
             return $result;
         }
+
         $nodeName = $request->getNodeName();
         $postFields = $nodeName ? [$nodeName => $request->getBody()] : $request->getBody();
         $postFields = array_merge($postFields, [
@@ -214,7 +268,7 @@ class Client
             $result->status = ResultSet::ERROR_STATUS;
             return $result;
         }
-        $result->status = 'success';
+        $result->status = ResultSet::SUCCESS_STATUS;
         $result->data = $respObject;
         return $result;
     }

@@ -19,7 +19,7 @@ class TokenRequest extends BaseRequest implements RequestInterface
      */
     public function requireToken(): bool
     {
-        return true;
+        return false;
     }
 
     /**

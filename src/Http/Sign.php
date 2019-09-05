@@ -6,7 +6,7 @@ namespace Tax\Http;
  * Author:Robert
  *
  * Class Sign
- * @package Tax\Services
+ * @package Tax\Http
  */
 class Sign
 {
@@ -28,7 +28,6 @@ class Sign
      */
     public function __construct(array $options = [])
     {
-
         if (isset($options['systemId'])) {
             $this->systemId = $options['systemId'];
         }
@@ -38,8 +37,6 @@ class Sign
         if (!$this->systemId || !$this->rsaPubPath) {
             throw new \Exception('rsaPubPath或systemId签名参数配置错误');
         }
-
-
     }
 
     /**
