@@ -218,6 +218,7 @@ class Client
      */
     public function execute(RequestInterface $request): ResultSet
     {
+
         $result = new ResultSet();
         if ($request->validate() === false) {
             $result->code = ResultSet::CLIENT_VALIDATION_ERROR_CODE;
@@ -278,7 +279,7 @@ class Client
      */
     public function writeLog($msg)
     {
-
+        error_log($msg, 3, $this->logFile);
     }
 
     /**
@@ -326,7 +327,8 @@ class Client
             $this->_requestInfo['body'] = $postBodyString;
         }
         if ($this->logFile) {
-            $this->writeLog('REQUEST'.json_encode($this->_requestInfo).PHP_EOL.'URL:'.$url.PHP_EOL.'RESPONSE:'.$this->_response);
+            $date = date('Y-m-d H:i:s');
+            $this->writeLog('REQUEST ['.$date.']'.json_encode($this->_requestInfo).PHP_EOL.'RESPONSE ['.$date.']'.$this->_response.PHP_EOL);
         }
         $curlErrorCode = curl_errno($ch);
         if ($curlErrorCode) {

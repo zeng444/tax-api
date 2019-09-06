@@ -3,10 +3,9 @@
 namespace Tax\Requests;
 
 /**
- * 获取Token服务
  * Author:Robert
  *
- * Class Token
+ * Class BaseRequest
  * @package Tax\Requests
  */
 abstract class BaseRequest

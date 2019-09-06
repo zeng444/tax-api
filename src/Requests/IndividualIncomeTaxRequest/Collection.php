@@ -1,6 +1,6 @@
 <?php
 
-namespace Tax\Requests\ReportRequest;
+namespace Tax\Requests\IndividualIncomeTaxRequest;
 
 use Tax\Requests\BaseRequest;
 
@@ -8,10 +8,75 @@ use Tax\Requests\BaseRequest;
  * Author:Robert
  *
  * Class Collection
- * @package Tax\Requests\ReportRequest
+ * @package Tax\Requests\IndividualIncomeTaxRequest
  */
 class Collection extends BaseRequest
 {
+
+    /**
+     * @var
+     */
+    public $taxCategory;
+
+    /**
+     * @var
+     */
+    public $taxTypeCode;
+
+    /**
+     * @var
+     */
+    public $taxBaseTotal;
+
+    /**
+     * @var
+     */
+    public $taxRate;
+
+    /**
+     * @var
+     */
+    public $taxPayableTotal;
+
+    /**
+     * @var
+     */
+    public $taxReducedTotal;
+
+    /**
+     * @var
+     */
+    public $taxReducedType;
+
+    /**
+     * @var
+     */
+    public $taxPaidTotal;
+
+    /**
+     * @var
+     */
+    public $agentTaxChargeableTotal;
+
+    /**
+     * @var
+     */
+    public $agentTaxPaidTotal;
+
+    /**
+     * @var
+     */
+    public $taxOriginSign;
+
+    /**
+     * @var
+     */
+    public $taxOriginCode;
+
+    /**
+     * @var
+     */
+    public $taxOriginPosition;
 
     /**
      * 增值税
@@ -53,7 +118,7 @@ class Collection extends BaseRequest
      */
     public function validate(): bool
     {
-//        $this->setMessage('something wrong');
+        //        $this->setMessage('something wrong');
         return true;
     }
 
@@ -70,7 +135,7 @@ class Collection extends BaseRequest
         if (!in_array($taxTypeCode, array_keys(self::TAX_TYPE_MAP))) {
             throw  new \Exception('不合法的征收项目');
         }
-        $this->params['zsxm'] = $taxTypeCode;
+        $this->params['zsxm'] = $this->taxTypeCode = $taxTypeCode;
     }
 
     /**
@@ -81,7 +146,7 @@ class Collection extends BaseRequest
      */
     public function setTaxCategory(string $taxCategory)
     {
-        $this->params['zspm'] = $taxCategory;
+        $this->params['zspm'] = $this->taxCategory = $taxCategory;
     }
 
 
@@ -93,7 +158,7 @@ class Collection extends BaseRequest
      */
     public function serTaxBaseTotal(string $total)
     {
-        $this->params['jsyj'] = $total;
+        $this->params['jsyj'] = $this->taxBaseTotal = $total;
     }
 
     /**
@@ -108,7 +173,7 @@ class Collection extends BaseRequest
      */
     public function serTaxRate(string $ratio)
     {
-        $this->params['slhse'] = $ratio;
+        $this->params['slhse'] = $this->taxRate = $ratio;
     }
 
     /**
@@ -119,7 +184,7 @@ class Collection extends BaseRequest
      */
     public function setTaxPayableTotal($total)
     {
-        $this->params['ynse'] = $total;
+        $this->params['ynse'] = $this->taxPayableTotal = $total;
     }
 
     /**
@@ -131,8 +196,8 @@ class Collection extends BaseRequest
      */
     public function setTaxReducedTotal(string $total, string $type = '')
     {
-        $this->params['jmse'] = $total;
-        $this->params['jmxz'] = $type;
+        $this->params['jmse'] = $this->taxReducedTotal = $total;
+        $this->params['jmxz'] = $this->taxReducedType = $type;
     }
 
     /**
@@ -141,9 +206,9 @@ class Collection extends BaseRequest
      *
      * @param string $total 一般为0
      */
-    public function setTaxPaid(string $total)
+    public function setTaxPaidTotal(string $total)
     {
-        $this->params['yjse'] = $total;
+        $this->params['yjse'] = $this->taxPaidTotal = $total;
     }
 
     /**
@@ -154,7 +219,7 @@ class Collection extends BaseRequest
      */
     public function setAgentTaxChargeableTotal(string $total)
     {
-        $this->params['ydzse'] = $total;
+        $this->params['ydzse'] = $this->agentTaxChargeableTotal = $total;
     }
 
     /**
@@ -165,7 +230,7 @@ class Collection extends BaseRequest
      */
     public function setAgentTaxPaidTotal(string $total)
     {
-        $this->params['sdzse'] = $total;
+        $this->params['sdzse'] = $this->agentTaxPaidTotal = $total;
     }
 
     /**
@@ -178,8 +243,8 @@ class Collection extends BaseRequest
      */
     public function setTaxOrigin(string $sign, string $code, string $position)
     {
-        $this->params['sybz'] = $sign;
-        $this->params['sybh'] = $code;
-        $this->params['syzl'] = $position;
+        $this->params['sybz'] = $this->taxOriginSign = $sign;
+        $this->params['sybh'] = $this->taxOriginCode = $code;
+        $this->params['syzl'] = $this->taxOriginPosition = $position;
     }
 }

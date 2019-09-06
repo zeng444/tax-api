@@ -2,16 +2,16 @@
 
 namespace Tax\Requests;
 
-use Tax\Requests\ReportRequest\Collection;
+use Tax\Requests\IndividualIncomeTaxRequest\Collection;
 
 /**
- * 平台企业基础信息接口
+ * 个人所得税详细信息接口
  * Author:Robert
  *
- * Class ReportRequest
+ * Class IndividualIncomeTaxRequest
  * @package Tax\Requests
  */
-class ReportRequest extends BaseRequest implements RequestInterface
+class IndividualIncomeTaxRequest extends BaseRequest implements RequestInterface
 {
 
 
@@ -51,6 +51,16 @@ class ReportRequest extends BaseRequest implements RequestInterface
      * @var
      */
     public $taxpayerUuid;
+
+    /**
+     * @var
+     */
+    public $startDate;
+
+    /**
+     * @var
+     */
+    public $endDate;
 
 
     /**
@@ -96,15 +106,17 @@ class ReportRequest extends BaseRequest implements RequestInterface
 
 
     /**
+     * TODO 有问题
+     * 被代征单位纳税人信息
      * Author:Robert
      *
-     * @param string $name 被代征单位纳税人名称（被代征人的姓名）
-     * @param string $companyLicenseNo 被代征单位纳税人识别号（被代征人的身份证号）
+     * @param string $name 纳税人名称（平台企业）
+     * @param string $companyLicenseNo 纳税人识别号（平台企业）
      */
     public function setTaxpayerCompany(string $name, string $companyLicenseNo = '')
     {
-        $this->params['bdzdwnsrmc'] = $this->taxPayerCompanyName = $name;
-        $this->params['bdzdwnsrsbh'] = $this->taxPayerCompanyLicenseNo = $companyLicenseNo;
+        $this->params['nsrmc'] = $this->taxPayerCompanyName = $name;
+        $this->params['nsrsbh '] = $this->taxPayerCompanyLicenseNo = $companyLicenseNo;
     }
 
     /**
@@ -134,6 +146,20 @@ class ReportRequest extends BaseRequest implements RequestInterface
     }
 
     /**
+     * 税款所属起止
+     * Author:Robert
+     *
+     * @param string $startDate
+     * @param string $endDate
+     */
+    public function setTaxDateRange(string $startDate, string $endDate)
+    {
+        $this->params['skssqq'] = $this->startDate = $startDate;
+        $this->params['skssqz'] = $this->endDate = $endDate;
+    }
+
+
+    /**
      * Author:Robert
      *
      * @param Collection $collection
@@ -145,20 +171,6 @@ class ReportRequest extends BaseRequest implements RequestInterface
             $this->setMessage($collection->getMessage());
         }
         $this->collection[] = array_merge($this->params, $collection->getBody());
-    }
-
-
-    /**
-     * 税款所属起止
-     * Author:Robert
-     *
-     * @param string $startDate
-     * @param string $endDate
-     */
-    public function setTaxDateRange(string $startDate, string $endDate)
-    {
-        $this->params['skssqq'] = $startDate;
-        $this->params['skssqz'] = $endDate;
     }
 
 
