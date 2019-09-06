@@ -215,12 +215,12 @@ class PlatformInformationRequest extends BaseRequest implements RequestInterface
      * Author:Robert
      *
      * @return bool
-     * @throws \Exception
      */
     public function validate(): bool
     {
         if (!$this->name || !$this->licenseNo || !$this->industryCode || !$this->revenueDepartment || !$this->revenueParentDepartment) {
-            throw new \Exception('表单填写不完整');
+            $this->setMessage('表单填写不完整');
+            return false;
         }
         return true;
     }

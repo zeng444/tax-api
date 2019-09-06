@@ -23,6 +23,43 @@ abstract class BaseRequest
     protected $token;
 
     /**
+     * @var
+     */
+    private $_message;
+
+
+    /**
+     * Author:Robert
+     *
+     * @return string
+     */
+    public function getMessage(): string
+    {
+        return $this->_message;
+    }
+
+    /**
+     * Author:Robert
+     *
+     * @param string $msg
+     * @return string
+     */
+    public function setMessage(string $msg)
+    {
+        return $this->_message = $msg;
+    }
+
+    /**'
+     * Author:Robert
+     *
+     * @return bool
+     */
+    public function hasMessage(): bool
+    {
+        return !!$this->_message;
+    }
+
+    /**
      * Author:Robert
      *
      * @return array

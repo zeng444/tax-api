@@ -34,6 +34,7 @@ class ResultSet
     const ERROR_STATUS = 'error';
 
 
+    const CLIENT_VALIDATION_ERROR_CODE = '4000';
     const HTTP_INTERNAL_SERVER_ERROR_CODE = '5000';
     const HTTP_NO_CONTENT_CODE = '2004';
     const API_100_CODE = '100';
@@ -76,6 +77,7 @@ class ResultSet
     const API_16_CODE = '16';
 
     const API_ERROR_CODE = [
+        self::CLIENT_VALIDATION_ERROR_CODE => '验证器报错',
         self::HTTP_NO_CONTENT_CODE => '没有返回客户端错误',
         self::HTTP_INTERNAL_SERVER_ERROR_CODE => '服务端返回异常',
         self::API_100_CODE => '请求成功',

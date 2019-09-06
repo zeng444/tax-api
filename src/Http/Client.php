@@ -219,11 +219,9 @@ class Client
     public function execute(RequestInterface $request): ResultSet
     {
         $result = new ResultSet();
-        try {
-            $request->validate();
-        } catch (\Exception $e) {
-            $result->code = $e->getCode();
-            $result->message = $e->getMessage();
+        if ($request->validate() === false) {
+            $result->code = ResultSet::CLIENT_VALIDATION_ERROR_CODE;
+            $result->message = $request->getMessage();
             $result->status = ResultSet::ERROR_STATUS;
             return $result;
         }

@@ -2,6 +2,8 @@
 
 namespace Tax\Requests;
 
+use Tax\Requests\ReportRequest\Collection;
+
 /**
  * 平台企业基础信息接口
  * Author:Robert
@@ -11,6 +13,9 @@ namespace Tax\Requests;
  */
 class ReportRequest extends BaseRequest implements RequestInterface
 {
+
+
+    protected $collection = [];
 
     /**
      * @var
@@ -69,6 +74,16 @@ class ReportRequest extends BaseRequest implements RequestInterface
     }
 
     /**
+     * Author:Robert
+     *
+     * @return bool
+     */
+    public function validate(): bool
+    {
+        return !$this->hasMessage();
+    }
+
+    /**
      * 服务方唯一标识
      * Author:Robert
      *
@@ -118,5 +133,43 @@ class ReportRequest extends BaseRequest implements RequestInterface
         $this->params['sshy'] = $this->industryCode = $industryCode;
     }
 
+    /**
+     * Author:Robert
+     *
+     * @param Collection $collection
+     * @throws \Exception
+     */
+    public function addCollection(Collection $collection)
+    {
+        if ($collection->validate() === false) {
+            $this->setMessage($collection->getMessage());
+        }
+        $this->collection[] = array_merge($this->params, $collection->getBody());
+    }
+
+
+    /**
+     * 税款所属起止
+     * Author:Robert
+     *
+     * @param string $startDate
+     * @param string $endDate
+     */
+    public function setTaxDateRange(string $startDate, string $endDate)
+    {
+        $this->params['skssqq'] = $startDate;
+        $this->params['skssqz'] = $endDate;
+    }
+
+
+    /**
+     * Author:Robert
+     *
+     * @return array
+     */
+    public function getBody(): array
+    {
+        return $this->collection;
+    }
 
 }

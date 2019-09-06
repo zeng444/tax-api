@@ -13,18 +13,64 @@ use Tax\Requests\BaseRequest;
 class Collection extends BaseRequest
 {
 
+    /**
+     * 增值税
+     */
+    const ADD_VALUE_TAX_CODE = '10101';
 
+    /**
+     * 印花税
+     */
+    const STAMP_TAX_CODE = '10111';
 
+    /**
+     * 城建费
+     */
+    const CITY_BUILDING_TAX_CODE = '10109';
+
+    /**
+     * 教育附加税
+     */
+    const EDUCATION_ADDITIONAL_TAX_CODE = '30203';
+
+    /**
+     * 本地教育附加税
+     */
+    const LOCAL_EDUCATION_ADDITIONAL_TAX_CODE = '30216';
+
+    const TAX_TYPE_MAP = [
+        self::ADD_VALUE_TAX_CODE => '增值税',
+        self::STAMP_TAX_CODE => '印花税',
+        self::CITY_BUILDING_TAX_CODE => '城建费',
+        self::EDUCATION_ADDITIONAL_TAX_CODE => '教育附加税',
+        self::LOCAL_EDUCATION_ADDITIONAL_TAX_CODE => '本地教育附加税',
+    ];
+
+    /**
+     * Author:Robert
+     *
+     * @return bool
+     */
+    public function validate(): bool
+    {
+//        $this->setMessage('something wrong');
+        return true;
+    }
 
     /**
      * 征收项目
      * Author:Robert
      *
-     * @param string $taxType
+     * @param string $taxTypeCode
+     * @throws \Exception
      */
-    public function setTaxType(string $taxType)
+    public function setTaxType(string $taxTypeCode)
     {
-        $this->params['zsxm'] = $taxType;
+
+        if (!in_array($taxTypeCode, array_keys(self::TAX_TYPE_MAP))) {
+            throw  new \Exception('不合法的征收项目');
+        }
+        $this->params['zsxm'] = $taxTypeCode;
     }
 
     /**
@@ -36,19 +82,6 @@ class Collection extends BaseRequest
     public function setTaxCategory(string $taxCategory)
     {
         $this->params['zspm'] = $taxCategory;
-    }
-
-    /**
-     * 税款所属起止
-     * Author:Robert
-     *
-     * @param string $startDate
-     * @param string $endDate
-     */
-    public function setTaxDateRange(string $startDate, string $endDate)
-    {
-        $this->params['skssqq'] = $startDate;
-        $this->params['skssqz'] = $endDate;
     }
 
 
@@ -106,7 +139,7 @@ class Collection extends BaseRequest
      * 已缴税额
      * Author:Robert
      *
-     * @param string $total
+     * @param string $total 一般为0
      */
     public function setTaxPaid(string $total)
     {
@@ -128,7 +161,7 @@ class Collection extends BaseRequest
      * 已代征税额
      * Author:Robert
      *
-     * @param string $total
+     * @param string $total 一般为0
      */
     public function setAgentTaxPaidTotal(string $total)
     {

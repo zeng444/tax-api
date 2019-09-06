@@ -44,4 +44,19 @@ interface RequestInterface
      * @return bool
      */
     public function requireToken(): bool;
+
+    /**
+     * Author:Robert
+     *
+     * @return string
+     */
+    public function getMessage(): string;
+
+    /**
+     * Author:Robert
+     *
+     * @param string $msg
+     * @return mixed
+     */
+    public function setMessage(string $msg);
 }
