@@ -6,20 +6,14 @@ use Tax\Http\Client as HttpClient;
 
 $opt= [
   'connectTimeout' => 1,
-  'logFile' => DEMO_PATH.'/logs/',
-  'cacheFile' => DEMO_PATH.'/logs/token', //Token存在cacheFile
-  'systemId' => '....',
-  'gatewayUrl' => 'http://................,
-  'rsaPubPath' => 'rsa_public_key.pem',
+    'logFile' => DEMO_PATH.'/logs/api.history.log',
+    'cacheFile' => DEMO_PATH.'/logs/token',
+    'systemId' => '..........',
+    'gatewayUrl' => 'http://.............',
+    'rsaPubPath' => DEMO_PATH.'/configs/rsa_public_key.pem',
 ];
 
-$client = new HttpClient([
-    'connectTimeout' => 1,
-    'logFile' => DEMO_PATH.'/logs/',
-    'systemId' => 'dj_jslw_wbyg_20190820',
-    'gatewayUrl' => $gatewayUrl,
-    'rsaPubPath' => DEMO_PATH.'/key/rsa_public_key.pem',
-]);
+$client = new HttpClient($opt);
 ```
 
 ## TOKEN维护重写
@@ -32,13 +26,17 @@ protected function setTokenToCache($data);
 protected function getTokenToCache();
 
 print_($client->getTokenToCache())
+
+```
+输出
+```php
+
 stdClass Object
 {
   [token] =>'xxxxxxxxxxxxx'
   [expires_at] =>'2019-09-06'
 }
 ```
-
 
 ## 服务调用
 
@@ -92,3 +90,5 @@ return $data ?? '';
 ```
 
 ### 其他我懒得写
+
+.............
