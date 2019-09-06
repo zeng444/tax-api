@@ -197,7 +197,6 @@ class Client
     {
         $data = $this->getTokenFromCache();
         if (!$data) {
-            echo "Request Token".PHP_EOL;
             $tokenRequest = new TokenRequest();
             $response = $this->execute($tokenRequest);
             if (!$response->isSuccess()) {
