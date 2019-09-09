@@ -112,6 +112,15 @@ class Collection extends BaseRequest
     ];
 
     /**
+     * 税率映射表
+     */
+    const TAX_TYPE_RATIO_MAP = [
+        '0.07' => self::CITY_BUILDING_TAX_CODE,
+        '0.03' => self::EDUCATION_ADDITIONAL_TAX_CODE,
+        '0.02' => self::LOCAL_EDUCATION_ADDITIONAL_TAX_CODE,
+    ];
+
+    /**
      * Author:Robert
      *
      * @return bool

@@ -21,7 +21,6 @@ try {
     $data = $result->getData();
     echo ($data->token ?? '').PHP_EOL;
     echo ($data->expires_at ?? '').PHP_EOL;
-
 } catch (\Exception $e) {
     echo $e->getMessage().PHP_EOL;
     echo $e->getTraceAsString().PHP_EOL;

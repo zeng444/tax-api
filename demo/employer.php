@@ -7,7 +7,6 @@ define('ROOT_PATH', dirname(__DIR__));
 define('DEMO_PATH', __DIR__);
 include_once ROOT_PATH.'/vendor/autoload.php';
 try {
-
     $config = include_once DEMO_PATH.'/configs/config.php';
     $client = new HttpClient($config);
     $employerService = new EmployerRequest();

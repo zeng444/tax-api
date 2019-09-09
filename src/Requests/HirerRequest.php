@@ -357,7 +357,6 @@ class HirerRequest extends BaseRequest implements RequestInterface
             throw  new \Exception('错误的性别类型');
         }
         $this->params['fwfxb'] = $this->gender = self::GENDER_MAP[$gender] ?? '';
-
     }
 
     /**
@@ -418,5 +417,4 @@ class HirerRequest extends BaseRequest implements RequestInterface
     {
         $this->params['ptzcsj'] = $this->registerDate = $date;
     }
-
 }

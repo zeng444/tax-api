@@ -2,16 +2,16 @@
 
 namespace Tax\Requests;
 
-use Tax\Requests\IndividualIncomeTaxSummaryRequest\Collection;
+use Tax\Requests\IndividualIncomeTaxDetailRequest\Collection;
 
 /**
- * 个人所得税汇总信息接口
+ * 个人所得税详细信息接口
  * Author:Robert
  *
  * Class IndividualIncomeTaxSummaryRequest
  * @package Tax\Requests
  */
-class IndividualIncomeTaxSummaryRequest extends BaseRequest implements RequestInterface
+class IndividualIncomeTaxDetailRequest extends BaseRequest implements RequestInterface
 {
 
     /**
@@ -123,7 +123,6 @@ class IndividualIncomeTaxSummaryRequest extends BaseRequest implements RequestIn
     public function setReportDate(string $date)
     {
         $this->params['sbrq'] = $this->reportDate = $date;
-
     }
 
 
@@ -139,6 +138,4 @@ class IndividualIncomeTaxSummaryRequest extends BaseRequest implements RequestIn
         $this->params['nsrmc'] = $this->companyName = $name;
         $this->params['nsrsbh '] = $this->companyLicenseNo = $licenseNo;
     }
-
-
 }

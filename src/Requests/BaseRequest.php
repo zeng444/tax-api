@@ -98,5 +98,4 @@ abstract class BaseRequest
     {
         return true;
     }
-
 }

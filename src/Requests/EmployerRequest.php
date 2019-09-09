@@ -172,7 +172,6 @@ class EmployerRequest extends BaseRequest implements RequestInterface
     public function setCompanyName(string $name)
     {
         $this->params['nsrmc'] = $this->companyName = $name;
-
     }
 
     /**
@@ -286,6 +285,4 @@ class EmployerRequest extends BaseRequest implements RequestInterface
     {
         $this->params['jyfw'] = $this->businessScope = $scope;
     }
-
-
 }

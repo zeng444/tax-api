@@ -78,5 +78,4 @@ class Sign
         }
         return $this->encodeCryptData($cryptData);
     }
-
 }

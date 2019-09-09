@@ -1,8 +1,7 @@
 <?php
 
 use Tax\Http\Client as HttpClient;
-use Tax\Requests\IndividualIncomeTaxSummaryRequest\Collection;
-use Tax\Requests\IndividualIncomeTaxSummaryRequest;
+use Tax\Requests\IndividualIncomeTaxDetailSummary;
 
 define('ROOT_PATH', dirname(__DIR__));
 define('DEMO_PATH', __DIR__);
@@ -11,22 +10,18 @@ include_once ROOT_PATH.'/vendor/autoload.php';
 try {
     $config = include_once DEMO_PATH.'/configs/config.php';
     $client = new HttpClient($config);
-    $reportRequest = new IndividualIncomeTaxSummaryRequest();
+    $reportRequest = new IndividualIncomeTaxDetailSummary();
     $reportRequest->setTaxDateRange('2019-09-05', '201-09-06');
     $reportRequest->setReportDate(date('Y-m-d'));
     $reportRequest->setPlatformCompany('?', '');
-    foreach ([1, 2] as $item) {
-        $reportRequestCollection = new Collection();
-        $reportRequestCollection->setTaxRate(0.5);
-        $reportRequestCollection->setPeopleQuantity($item);
-        $reportRequestCollection->setTaxIncomeTotal(1);
-        $reportRequestCollection->setTaxPayableTotal(1);
-        $reportRequestCollection->setTaxPaidTotal(1);
-        $reportRequestCollection->setTaxRefundedTotal(1);
-        $reportRequest->addCollection($reportRequestCollection);
-    }
+    $reportRequest->setTaxRate(0.5);
+    $reportRequest->setPeopleQuantity(110);
+    $reportRequest->setTaxIncomeTotal(1);
+    $reportRequest->setTaxPayableTotal(1);
+    $reportRequest->setTaxPaidTotal(1);
+    $reportRequest->setTaxRefundedTotal(1);
     $result = $client->execute($reportRequest);
-    //        print_r($client->debug());
+            print_r($client->debug());
     if (!$result->isSuccess()) {
         echo 'msg:'.$result->getMessage().PHP_EOL;
         echo 'code:'.$result->getCode().$result->getCodeMsg().PHP_EOL;

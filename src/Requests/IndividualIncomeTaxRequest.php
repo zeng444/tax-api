@@ -5,7 +5,7 @@ namespace Tax\Requests;
 use Tax\Requests\IndividualIncomeTaxRequest\Collection;
 
 /**
- * 个人所得税详细信息接口
+ * 个人申报信息信息接口
  * Author:Robert
  *
  * Class IndividualIncomeTaxRequest
@@ -183,5 +183,4 @@ class IndividualIncomeTaxRequest extends BaseRequest implements RequestInterface
     {
         return $this->collection;
     }
-
 }

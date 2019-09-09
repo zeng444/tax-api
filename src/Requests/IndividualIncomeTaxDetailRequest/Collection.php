@@ -1,6 +1,6 @@
 <?php
 
-namespace Tax\Requests\IndividualIncomeTaxSummaryRequest;
+namespace Tax\Requests\IndividualIncomeTaxDetailRequest;
 
 use Tax\Requests\BaseRequest;
 

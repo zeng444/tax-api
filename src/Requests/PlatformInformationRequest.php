@@ -426,5 +426,4 @@ class PlatformInformationRequest extends BaseRequest implements RequestInterface
     {
         $this->params['wz'] = $this->siteUrl = $url;
     }
-
 }

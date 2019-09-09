@@ -5,7 +5,6 @@ namespace Tax\Http;
 use Tax\Requests\RequestInterface;
 use Tax\Requests\TokenRequest;
 
-
 class Client
 {
 
@@ -243,7 +242,8 @@ class Client
             $resp = $this->httpPost($this->gatewayUrl.$request->getServiceId(), $postFields ? json_encode($postFields) : '');
         } catch (\Exception $e) {
             $result->code = ResultSet::HTTP_INTERNAL_SERVER_ERROR_CODE;
-            $result->message = ResultSet::API_ERROR_CODE[ResultSet::HTTP_INTERNAL_SERVER_ERROR_CODE];;
+            $result->message = ResultSet::API_ERROR_CODE[ResultSet::HTTP_INTERNAL_SERVER_ERROR_CODE];
+            ;
             $result->status = ResultSet::ERROR_STATUS;
             return $result;
         }
