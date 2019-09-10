@@ -439,7 +439,7 @@ class TaskRequest extends BaseRequest implements RequestInterface
      * @param string $timeUnit 时间单位
      * @throws \Exception
      */
-    public function setDuration(string $startDate, string $endDate, $timeUnit = '天')
+    public function setDuration(string $startDate, string $endDate, string $timeUnit = '天')
     {
         if (!$startDate || !$endDate) {
             throw new \Exception('设置任务时间进度信息不能为空');
