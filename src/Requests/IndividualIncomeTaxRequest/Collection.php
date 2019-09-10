@@ -191,7 +191,7 @@ class Collection extends BaseRequest
      *
      * @param $total
      */
-    public function setTaxPayableTotal($total)
+    public function setTaxPayableTotal(string $total)
     {
         $this->params['ynse'] = $this->taxPayableTotal = $total;
     }
