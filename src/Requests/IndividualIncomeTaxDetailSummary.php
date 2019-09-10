@@ -2,6 +2,8 @@
 
 namespace Tax\Requests;
 
+use Tax\Requests\IndividualIncomeTaxDetailSummary\Collection;
+
 /**
  * 个人所得税汇总信息接口
  * Author:Robert
@@ -11,6 +13,11 @@ namespace Tax\Requests;
  */
 class IndividualIncomeTaxDetailSummary extends BaseRequest implements RequestInterface
 {
+
+    /**
+     * @var array
+     */
+    protected $collection = [];
 
     /**
      * @var
@@ -37,35 +44,6 @@ class IndividualIncomeTaxDetailSummary extends BaseRequest implements RequestInt
      */
     public $companyLicenseNo;
 
-    /**
-     * @var
-     */
-    public $taxRate;
-
-    /**
-     * @var
-     */
-    public $peopleQuantity;
-
-    /**
-     * @var
-     */
-    public $taxIncomeTotal;
-
-    /**
-     * @var
-     */
-    public $taxPayableTotal;
-
-    /**
-     * @var
-     */
-    public $taxPaidTotal;
-
-    /**
-     * @var
-     */
-    public $taxRefundedTotal;
 
     /**
      * Author:Robert
@@ -105,7 +83,7 @@ class IndividualIncomeTaxDetailSummary extends BaseRequest implements RequestInt
      */
     public function getBody(): array
     {
-        return [$this->params];
+        return $this->collection;
     }
 
 
@@ -147,70 +125,18 @@ class IndividualIncomeTaxDetailSummary extends BaseRequest implements RequestInt
         $this->params['nsrsbh'] = $this->companyLicenseNo = $licenseNo;
     }
 
-    /**
-     * 税率
-     * Author:Robert
-     *
-     * @param string $ratio （5 %、10%、20%、30%、35%）
-     */
-    public function setTaxRate(string $ratio)
-    {
-        $this->params['sl'] = $this->taxRate = $ratio;
-    }
-
 
     /**
-     * 申报人数
      * Author:Robert
      *
-     * @param string $number
+     * @param Collection $collection
+     * @throws \Exception
      */
-    public function setPeopleQuantity(string $number)
+    public function addCollection(Collection $collection)
     {
-        $this->params['sbrs'] = $this->peopleQuantity = $number;
-    }
-
-    /**
-     * 应税收入
-     * Author:Robert
-     *
-     * @param string $total
-     */
-    public function setTaxIncomeTotal(string $total)
-    {
-        $this->params['yssr'] = $this->taxIncomeTotal = $total;
-    }
-
-    /**
-     * 应纳税额
-     * Author:Robert
-     *
-     * @param string $total
-     */
-    public function setTaxPayableTotal(string $total)
-    {
-        $this->params['ynse'] = $this->taxPayableTotal = $total;
-    }
-
-    /**
-     * 累计已缴纳税额
-     * Author:Robert
-     *
-     * @param string $total
-     */
-    public function setTaxPaidTotal(string $total)
-    {
-        $this->params['ljyjnse'] = $this->taxPaidTotal = $total;
-    }
-
-    /**
-     * 本期应补退税额
-     * Author:Robert
-     *
-     * @param string $total
-     */
-    public function setTaxRefundedTotal(string $total)
-    {
-        $this->params['bqybtse'] = $this->taxRefundedTotal = $total;
+        if ($collection->validate() === false) {
+            $this->setMessage($collection->getMessage());
+        }
+        $this->collection[] = array_merge($this->params, $collection->getBody());
     }
 }
