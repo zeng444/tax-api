@@ -22,8 +22,8 @@ try {
         $reportRequestCollection = new Collection();
         $reportRequestCollection->setTaxType($type);
         $reportRequestCollection->setTaxCategory('结算结束');
-        $reportRequestCollection->serTaxBaseTotal(1000);
-        $reportRequestCollection->serTaxRate(0.5);
+        $reportRequestCollection->setTaxBaseTotal(1000);
+        $reportRequestCollection->setTaxRate(0.5);
         $reportRequestCollection->setTaxPayableTotal('212313');
         $reportRequestCollection->setTaxReducedTotal('22');
         $reportRequestCollection->setTaxPaidTotal('22');

@@ -1,7 +1,6 @@
 <?php
 
 use Tax\Http\Client as HttpClient;
-use Tax\Requests\IndividualIncomeTaxDetailRequest\Collection;
 use Tax\Requests\IndividualIncomeTaxDetailRequest;
 
 define('ROOT_PATH', dirname(__DIR__));
@@ -14,18 +13,16 @@ try {
     $reportRequest = new IndividualIncomeTaxDetailRequest();
     $reportRequest->setTaxDateRange('2019-09-05', '201-09-06');
     $reportRequest->setReportDate(date('Y-m-d'));
-    $reportRequest->setPlatformCompany('?', '');
-    foreach ([1, 2] as $item) {
-        $reportRequestCollection = new Collection();
-        $reportRequestCollection->setTaxRate(0.5);
-        $reportRequestCollection->setPeopleQuantity($item);
-        $reportRequestCollection->setTaxIncomeTotal(1);
-        $reportRequestCollection->setTaxPayableTotal(1);
-        $reportRequestCollection->setTaxPaidTotal(1);
-        $reportRequestCollection->setTaxRefundedTotal(1);
-        $reportRequest->addCollection($reportRequestCollection);
-    }
-    $result = $client->execute($reportRequest);
+    $reportRequest->setPlatformCompany('', '', '', '', '');
+    $reportRequest->setRevenue('');
+    $reportRequest->setTaxpayer('', '', '', '', '');
+    $reportRequest->setTaxIncomeTotal('', '');
+    $reportRequest->setTaxBaseTotal('');
+    $reportRequest->setTaxRate('');
+    $reportRequest->setDeductedTotal('');
+    $reportRequest->setTaxPayableTotal('');
+    $reportRequest->setTaxPaidTotal('');
+    $reportRequest->setTaxRefundedTotal('');
     //        print_r($client->debug());
     if (!$result->isSuccess()) {
         echo 'msg:'.$result->getMessage().PHP_EOL;
