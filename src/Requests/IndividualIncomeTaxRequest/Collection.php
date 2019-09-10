@@ -165,7 +165,7 @@ class Collection extends BaseRequest
      *
      * @param string $total 当月收入/1.03>=10万（无税时计税依据=当月收入/1.03，有税时计税依据=当月收入/1.03）
      */
-    public function serTaxBaseTotal(string $total)
+    public function setTaxBaseTotal(string $total)
     {
         $this->params['jsyj'] = $this->taxBaseTotal = $total;
     }
@@ -180,7 +180,7 @@ class Collection extends BaseRequest
      * 教育费附加3%
      * 地方教育附加 2%\
      */
-    public function serTaxRate(string $ratio)
+    public function setTaxRate(string $ratio)
     {
         $this->params['slhse'] = $this->taxRate = $ratio;
     }
