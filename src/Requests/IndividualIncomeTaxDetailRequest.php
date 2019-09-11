@@ -2,7 +2,6 @@
 
 namespace Tax\Requests;
 
-
 /**
  * 个人所得税详细信息接口
  * Author:Robert

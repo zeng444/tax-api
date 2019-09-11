@@ -13,13 +13,13 @@ try {
     $client = new HttpClient($config);
     $reportRequest = new IndividualIncomeTaxRequest();
     $reportRequest->setTaxDateRange('2019-09-05', '201-09-06');
-    $reportRequest->setTaxpayerUUId('?');
-    $reportRequest->setTaxpayerCompany('?');
-    $reportRequest->setTaxpayer('?');
-    $reportRequest->setTaxIndustryCode('?');
     $types = array_keys(Collection::TAX_TYPE_MAP);
     foreach ($types as $type) {
         $reportRequestCollection = new Collection();
+        $reportRequestCollection->setTaxpayerUUId('?');
+        $reportRequestCollection->setTaxpayerCompany('?');
+        $reportRequestCollection->setTaxpayer('?');
+        $reportRequestCollection->setTaxIndustryCode('?');
         $reportRequestCollection->setTaxType($type);
         $reportRequestCollection->setTaxCategory('结算结束');
         $reportRequestCollection->setTaxBaseTotal(1000);

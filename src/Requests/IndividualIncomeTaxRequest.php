@@ -17,40 +17,7 @@ class IndividualIncomeTaxRequest extends BaseRequest implements RequestInterface
 
     protected $collection = [];
 
-    /**
-     * @var
-     */
-    public $taxPayerCompanyName;
 
-    /**
-     * @var
-     */
-    public $taxPayerIdNo;
-
-    /**
-     * @var
-     */
-    public $taxPayerCompanyLicenseNo;
-
-    /**
-     * @var
-     */
-    public $taxpayerIdTypeCode;
-
-    /**
-     * @var
-     */
-    public $industryCode;
-
-    /**
-     * @var
-     */
-    public $taxpayerCountryNo;
-
-    /**
-     * @var
-     */
-    public $taxpayerUuid;
 
     /**
      * @var
@@ -93,57 +60,7 @@ class IndividualIncomeTaxRequest extends BaseRequest implements RequestInterface
         return !$this->hasMessage();
     }
 
-    /**
-     * 服务方唯一标识
-     * Author:Robert
-     *
-     * @param string $uuid
-     */
-    public function setTaxpayerUUId(string $uuid)
-    {
-        $this->params['fwfuuid'] = $this->taxpayerUuid = $uuid;
-    }
 
-
-    /**
-     * TODO 有问题
-     * 被代征单位纳税人信息
-     * Author:Robert
-     *
-     * @param string $name 纳税人名称（平台企业）
-     * @param string $companyLicenseNo 纳税人识别号（平台企业）
-     */
-    public function setTaxpayerCompany(string $name, string $companyLicenseNo = '')
-    {
-        $this->params['nsrmc'] = $this->taxPayerCompanyName = $name;
-        $this->params['nsrsbh '] = $this->taxPayerCompanyLicenseNo = $companyLicenseNo;
-    }
-
-    /**
-     * 被代征人信息
-     * Author:Robert
-     *
-     * @param string $idNo 被代征人的身份证号
-     * @param string $idTypeCode 被代征人证件类型
-     * @param string $countryNo 国家或地区-填写被代征人国家地区代码，参见《申报表-计税excel页签：国家和地区代码》
-     */
-    public function setTaxpayer(string $idNo, string $idTypeCode = '201', string $countryNo = '156')
-    {
-        $this->params['zjhm'] = $this->taxPayerIdNo = $idNo;
-        $this->params['zjlx'] = $this->taxpayerIdTypeCode = $idTypeCode;
-        $this->params['gjhdq'] = $this->taxpayerCountryNo = $countryNo;
-    }
-
-    /**
-     * 所属行业
-     * Author:Robert
-     *
-     * @param string $industryCode （-填写平台企业所在行业代码，参见《行业代码-名称表》）
-     */
-    public function setTaxIndustryCode(string $industryCode)
-    {
-        $this->params['sshy'] = $this->industryCode = $industryCode;
-    }
 
     /**
      * 税款所属起止

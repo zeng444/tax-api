@@ -1,14 +1,14 @@
 <?php
 
-namespace Tax\Requests\IndividualIncomeTaxDetailSummary;
+namespace Tax\Requests\IndividualIncomeTaxSummary;
 
 use Tax\Requests\BaseRequest;
 
 /**
  * Author:Robert
  *
- * Class IndividualIncomeTaxDetailSummary
- * @package Tax\Requests\IndividualIncomeTaxRequest
+ * Class Collection
+ * @package Tax\Requests\IndividualIncomeTaxSummary
  */
 class Collection extends BaseRequest
 {
@@ -119,6 +119,4 @@ class Collection extends BaseRequest
     {
         $this->params['bqybtse'] = $this->taxRefundedTotal = $total;
     }
-
-
 }
