@@ -1,8 +1,8 @@
 <?php
 
 use Tax\Http\Client as HttpClient;
-use Tax\Requests\IndividualIncomeTaxSummary\Collection;
-use Tax\Requests\IndividualIncomeTaxSummary;
+use Tax\Requests\IndividualIncomeTaxSummaryRequest\Collection;
+use Tax\Requests\IndividualIncomeTaxSummaryRequest;
 
 define('ROOT_PATH', dirname(__DIR__));
 define('DEMO_PATH', __DIR__);
@@ -12,7 +12,7 @@ try {
     $config = include_once DEMO_PATH.'/configs/config.php';
     $client = new HttpClient($config);
 
-    $reportRequest = new IndividualIncomeTaxSummary();
+    $reportRequest = new IndividualIncomeTaxSummaryRequest();
     $reportRequest->setTaxDateRange('2019-09-05', '201-09-06');
     $reportRequest->setReportDate(date('Y-m-d'));
     $reportRequest->setPlatformCompany('?', '');

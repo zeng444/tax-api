@@ -1,6 +1,6 @@
 <?php
 
-namespace Tax\Requests\IndividualIncomeTaxSummary;
+namespace Tax\Requests\IndividualIncomeTaxSummaryRequest;
 
 use Tax\Requests\BaseRequest;
 
@@ -8,7 +8,7 @@ use Tax\Requests\BaseRequest;
  * Author:Robert
  *
  * Class Collection
- * @package Tax\Requests\IndividualIncomeTaxSummary
+ * @package Tax\Requests\IndividualIncomeTaxSummaryRequest
  */
 class Collection extends BaseRequest
 {

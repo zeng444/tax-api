@@ -2,7 +2,7 @@
 
 namespace Tax\Requests;
 
-use Tax\Requests\IndividualIncomeTaxSummary\Collection;
+use Tax\Requests\IndividualIncomeTaxSummaryRequest\Collection;
 
 /**
  * 个人所得税汇总信息接口
@@ -11,7 +11,7 @@ use Tax\Requests\IndividualIncomeTaxSummary\Collection;
  * Class IndividualIncomeTaxSummaryRequest
  * @package Tax\Requests
  */
-class IndividualIncomeTaxSummary extends BaseRequest implements RequestInterface
+class IndividualIncomeTaxSummaryRequest extends BaseRequest implements RequestInterface
 {
 
     /**
