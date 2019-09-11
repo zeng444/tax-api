@@ -353,7 +353,7 @@ class HirerRequest extends BaseRequest implements RequestInterface
      */
     public function setGender(string $gender)
     {
-        if (!in_array($gender, array_keys(self::GENDER_MAP))) {
+        if ($gender && !in_array($gender, array_keys(self::GENDER_MAP))) {
             throw  new \Exception('错误的性别类型');
         }
         $this->params['fwfxb'] = $this->gender = self::GENDER_MAP[$gender] ?? '';

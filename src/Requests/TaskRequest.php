@@ -448,7 +448,7 @@ class TaskRequest extends BaseRequest implements RequestInterface
         $this->params['jsfwsj'] = $this->endDate = $endDate;
         $diff = date_diff(date_create($startDate), date_create($endDate));
         $day = $diff->format('%a');
-        $this->params['fwsj'] = $day == '0' ? $day : 1;
+        $this->params['fwsj'] = $day == '0' ? $day : '1';
         $this->params['fwfjsds'] = $timeUnit ? $timeUnit : '天';
     }
 }
