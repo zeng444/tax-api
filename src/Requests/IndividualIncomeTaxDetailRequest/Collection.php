@@ -21,6 +21,11 @@ class Collection extends BaseRequest
     /**
      * @var
      */
+    public $taxPayerProvince;
+
+    /**
+     * @var
+     */
     public $taxPayerIdType;
 
     /**
@@ -115,14 +120,16 @@ class Collection extends BaseRequest
      * @param string $idNo
      * @param string $taxPayerMobile
      * @param string $countryCode
+     * @param string $taxPayerProvince 自然人默认填写东疆行政区划
      */
-    public function setTaxpayer(string $name, string $idType, string $idNo, string $taxPayerMobile, string $countryCode)
+    public function setTaxpayer(string $name, string $idType, string $idNo, string $taxPayerMobile, string $countryCode, string $taxPayerProvince)
     {
         $this->params['sfzjlx'] = $this->taxPayerIdType = $idType;
         $this->params['sfzjhm'] = $this->taxPayerIdNo = $idNo;
         $this->params['xm'] = $this->taxPayer = $name;
         $this->params['gjdq'] = $this->taxPayerCountryCode = $countryCode;
         $this->params['lxdh'] = $this->taxPayerMobile = $taxPayerMobile;
+        $this->params['scjydxzqh'] = $this->taxPayerProvince = $taxPayerProvince;
     }
 
 

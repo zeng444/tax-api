@@ -137,13 +137,14 @@ class EmployerRequest extends BaseRequest implements RequestInterface
      * @param string $imageBase64 "data:image/jpg;base64,编码" 营业执照图片
      * @param bool $isPath
      */
-    public function setCompanyLicenceNo(string $no, string $imageBase64, bool $isPath)
+    public function setCompanyLicenceNo(string $no, string $imageBase64, bool $isPath = true)
     {
         if ($isPath && is_readable($imageBase64)) {
             $imageBase64 = Client::imageBase64Encode($imageBase64);
         }
         $this->params['nsrsbh'] = $this->licenceNo = $no;
-        $this->params['yyzzfj'] = $this->licenceImg = $imageBase64;
+        $this->params['yyzzfj'][] = $imageBase64;
+        $this->licenceImg = $this->params['yyzzfj'];
     }
 
     /**
@@ -189,7 +190,7 @@ class EmployerRequest extends BaseRequest implements RequestInterface
      * @param string $countryCode 国家地区代码
      * @param string $cityCode 填写行政区划代码（市级）
      */
-    public function setCompanyAddress(string $address, string $addressDetail, $countryCode, $cityCode)
+    public function setCompanyAddress(string $address, string $addressDetail, string $countryCode, string $cityCode)
     {
         $this->params['gsdz'] = $this->companyAddress = $address;
         $this->params['xxdz'] = $this->companyAddressDetail = $addressDetail;
@@ -266,10 +267,10 @@ class EmployerRequest extends BaseRequest implements RequestInterface
 
 
     /**
-     * 发布方负责人姓名
+     * 发布方负责人
      * Author:Robert
      *
-     * @param string $name
+     * @param string $name 发布方负责人
      * @param string $mobile 发布方负责人手机号
      * @param string $no 发布方负责人身份证件号
      */

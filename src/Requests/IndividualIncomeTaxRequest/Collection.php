@@ -36,6 +36,11 @@ class Collection extends BaseRequest
     /**
      * @var
      */
+    public $taxPayer;
+
+    /**
+     * @var
+     */
     public $taxPayableTotal;
 
     /**
@@ -322,13 +327,16 @@ class Collection extends BaseRequest
      * 被代征人信息
      * Author:Robert
      *
+     * @param string $name 被代征人
      * @param string $idNo 被代征人的身份证号
      * @param string $idTypeCode 被代征人证件类型
      * @param string $countryNo 国家或地区-填写被代征人国家地区代码，参见《申报表-计税excel页签：国家和地区代码》
      */
-    public function setTaxpayer(string $idNo, string $idTypeCode = '201', string $countryNo = '156')
+    public function setTaxpayer(string $name, string $idNo, string $idTypeCode = '201', string $countryNo = '156')
     {
         $this->params['zjhm'] = $this->taxPayerIdNo = $idNo;
+        $this->params['bdzdwnsrsbh'] = $this->taxPayerIdNo = $idNo;
+        $this->params['bdzdwnsrmc'] = $this->taxPayer = $name;
         $this->params['zjlx'] = $this->taxpayerIdTypeCode = $idTypeCode;
         $this->params['gjhdq'] = $this->taxpayerCountryNo = $countryNo;
     }
@@ -343,6 +351,7 @@ class Collection extends BaseRequest
     {
         $this->params['sshy'] = $this->industryCode = $industryCode;
     }
+
 
     /**
      * Author:Robert

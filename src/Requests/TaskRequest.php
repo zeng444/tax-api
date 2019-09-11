@@ -355,7 +355,8 @@ class TaskRequest extends BaseRequest implements RequestInterface
         if ($isPath && is_readable($base64Data)) {
             $base64Data = Client::imageBase64Encode($base64Data);
         }
-        $this->params['ddrwfj'] = $this->evidenceImage = $base64Data;
+        $this->params['ddrwfj'][] = $base64Data;
+        $this->evidenceImage = $this->params['ddrwfj'];
     }
 
     /**
@@ -445,7 +446,7 @@ class TaskRequest extends BaseRequest implements RequestInterface
      * @param string $timeUnit 时间单位
      * @throws \Exception
      */
-    public function setDuration(string $startDate, string $endDate, string $timeUnit = '天')
+    public function setDuration(string $startDate, string $endDate, string $timeUnit = '小时')
     {
         if (!$startDate || !$endDate) {
             throw new \Exception('设置任务时间进度信息不能为空');
@@ -454,7 +455,9 @@ class TaskRequest extends BaseRequest implements RequestInterface
         $this->params['jsfwsj'] = $this->endDate = $endDate;
         $diff = date_diff(date_create($startDate), date_create($endDate));
         $day = $diff->format('%a');
-        $this->params['fwsj'] = $day == '0' ? $day : '1';
-        $this->params['fwfjsds'] = $timeUnit ? $timeUnit : '天';
+        $hour = $diff->format('%h');
+        $hour = ($day * 24) + $hour;
+        $this->params['fwsj'] = $hour != '0' ? (string)$hour : '1';
+        $this->params['fwfjsds'] = $timeUnit ? $timeUnit : '小时';
     }
 }
