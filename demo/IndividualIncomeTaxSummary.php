@@ -2,6 +2,7 @@
 
 use Tax\Http\Client as HttpClient;
 use Tax\Requests\IndividualIncomeTaxDetailSummary;
+use Tax\Requests\IndividualIncomeTaxDetailSummary\Collection;
 
 define('ROOT_PATH', dirname(__DIR__));
 define('DEMO_PATH', __DIR__);
@@ -14,12 +15,13 @@ try {
     $reportRequest->setTaxDateRange('2019-09-05', '201-09-06');
     $reportRequest->setReportDate(date('Y-m-d'));
     $reportRequest->setPlatformCompany('?', '');
-    $reportRequest->setTaxRate(0.5);
-    $reportRequest->setPeopleQuantity(110);
-    $reportRequest->setTaxIncomeTotal(1);
-    $reportRequest->setTaxPayableTotal(1);
-    $reportRequest->setTaxPaidTotal(1);
-    $reportRequest->setTaxRefundedTotal(1);
+    $collection = new Collection();
+    $collection->setTaxRate(0.5);
+    $collection->setPeopleQuantity(110);
+    $collection->setTaxIncomeTotal(1);
+    $collection->setTaxPayableTotal(1);
+    $collection->setTaxPaidTotal(1);
+    $collection->setTaxRefundedTotal(1);
     $result = $client->execute($reportRequest);
             print_r($client->debug());
     if (!$result->isSuccess()) {
