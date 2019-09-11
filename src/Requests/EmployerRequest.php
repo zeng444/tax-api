@@ -2,6 +2,8 @@
 
 namespace Tax\Requests;
 
+use Tax\Http\Client;
+
 /**
  * 发布方
  * Author:Robert
@@ -133,9 +135,13 @@ class EmployerRequest extends BaseRequest implements RequestInterface
      *
      * @param string $no 统一社会信用代码
      * @param string $imageBase64 "data:image/jpg;base64,编码" 营业执照图片
+     * @param bool $isPath
      */
-    public function setCompanyLicenceNo(string $no, string $imageBase64)
+    public function setCompanyLicenceNo(string $no, string $imageBase64, bool $isPath)
     {
+        if ($isPath && is_readable($imageBase64)) {
+            $imageBase64 = Client::imageBase64Encode($imageBase64);
+        }
         $this->params['nsrsbh'] = $this->licenceNo = $no;
         $this->params['yyzzfj'] = $this->licenceImg = $imageBase64;
     }

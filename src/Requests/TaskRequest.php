@@ -2,6 +2,8 @@
 
 namespace Tax\Requests;
 
+use Tax\Http\Client;
+
 /**
  * 获取Token服务
  * Author:Robert
@@ -346,9 +348,13 @@ class TaskRequest extends BaseRequest implements RequestInterface
      * Author:Robert
      *
      * @param string $base64Data
+     * @param bool $isPath
      */
-    public function setEvidenceImage(string $base64Data)
+    public function setEvidenceImage(string $base64Data, bool $isPath = true)
     {
+        if ($isPath && is_readable($base64Data)) {
+            $base64Data = Client::imageBase64Encode($base64Data);
+        }
         $this->params['ddrwfj'] = $this->evidenceImage = $base64Data;
     }
 

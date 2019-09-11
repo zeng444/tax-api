@@ -2,6 +2,8 @@
 
 namespace Tax\Requests;
 
+use Tax\Http\Client;
+
 /**
  * 服务方
  * Author:Robert
@@ -314,11 +316,15 @@ class HirerRequest extends BaseRequest implements RequestInterface
      * 设置实名认证照片
      * Author:Robert
      *
-     * @param string $base64DatA
+     * @param string $base64Data
+     * @param bool $isPath
      */
-    public function setIdCardImage(string $base64DatA)
+    public function setIdCardImage(string $base64Data, bool $isPath = true)
     {
-        $this->params['smrzfj'] = $this->idCardImage = $base64DatA;
+        if ($isPath && is_readable($base64Data)) {
+            $base64Data = Client::imageBase64Encode($base64Data);
+        }
+        $this->params['smrzfj'] = $this->idCardImage = $base64Data;
     }
 
     /**

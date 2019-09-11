@@ -141,6 +141,27 @@ class Client
     /**
      * Author:Robert
      *
+     * @param string $file
+     * @return string
+     */
+    public static function imageBase64Encode(string $file): string
+    {
+        $type = getimagesize($file);
+        $content = file_get_contents($file);
+        $binary = chunk_split(base64_encode($content));
+        $imgTypeMap = [
+            '1' => "gif",
+            '2' => "jpg",
+            '3' => "png",
+        ];
+        $type = $imgTypeMap[$type[2]] ?? 'jpg';
+        $img = 'data:image/'.$type.';base64,'.$binary;
+        return $img;
+    }
+
+    /**
+     * Author:Robert
+     *
      * @return string
      */
     private function makeSeq(): string
