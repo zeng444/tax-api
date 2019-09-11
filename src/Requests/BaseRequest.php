@@ -65,7 +65,7 @@ abstract class BaseRequest
      */
     public function getBody(): array
     {
-        return $this->params;
+        return [$this->params];
     }
 
 

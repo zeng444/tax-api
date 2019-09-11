@@ -90,7 +90,6 @@ class IndividualIncomeTaxRequest extends BaseRequest implements RequestInterface
         $this->collection[] = array_merge($this->params, $collection->getBody());
     }
 
-
     /**
      * Author:Robert
      *

@@ -119,4 +119,14 @@ class Collection extends BaseRequest
     {
         $this->params['bqybtse'] = $this->taxRefundedTotal = $total;
     }
+
+    /**
+     * Author:Robert
+     *
+     * @return array
+     */
+    public function getBody(): array
+    {
+        return $this->params;
+    }
 }

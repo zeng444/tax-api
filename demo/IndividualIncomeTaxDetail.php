@@ -2,6 +2,7 @@
 
 use Tax\Http\Client as HttpClient;
 use Tax\Requests\IndividualIncomeTaxDetailRequest;
+use Tax\Requests\IndividualIncomeTaxDetailRequest\Collection;
 
 define('ROOT_PATH', dirname(__DIR__));
 define('DEMO_PATH', __DIR__);
@@ -11,18 +12,21 @@ try {
     $config = include_once DEMO_PATH.'/configs/config.php';
     $client = new HttpClient($config);
     $reportRequest = new IndividualIncomeTaxDetailRequest();
+
     $reportRequest->setTaxDateRange('2019-09-05', '201-09-06');
     $reportRequest->setReportDate(date('Y-m-d'));
     $reportRequest->setPlatformCompany('', '', '', '', '');
     $reportRequest->setRevenue('');
-    $reportRequest->setTaxpayer('', '', '', '', '');
-    $reportRequest->setTaxIncomeTotal('', '');
-    $reportRequest->setTaxBaseTotal('');
-    $reportRequest->setTaxRate('');
-    $reportRequest->setDeductedTotal('');
-    $reportRequest->setTaxPayableTotal('');
-    $reportRequest->setTaxPaidTotal('');
-    $reportRequest->setTaxRefundedTotal('');
+    $collection = new Collection();
+    $collection->setUUID('');
+    $collection->setTaxpayer('', '', '', '', '');
+    $collection->setTaxIncomeTotal('', '');
+    $collection->setTaxBaseTotal('');
+    $collection->setTaxRate('');
+    $collection->setDeductedTotal('');
+    $collection->setTaxPayableTotal('');
+    $collection->setTaxPaidTotal('');
+    $collection->setTaxRefundedTotal('');
     //        print_r($client->debug());
     if (!$result->isSuccess()) {
         echo 'msg:'.$result->getMessage().PHP_EOL;

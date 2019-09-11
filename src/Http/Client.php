@@ -243,7 +243,6 @@ class Client
         } catch (\Exception $e) {
             $result->code = ResultSet::HTTP_INTERNAL_SERVER_ERROR_CODE;
             $result->message = ResultSet::API_ERROR_CODE[ResultSet::HTTP_INTERNAL_SERVER_ERROR_CODE];
-            ;
             $result->status = ResultSet::ERROR_STATUS;
             return $result;
         }
