@@ -319,7 +319,7 @@ class HirerRequest extends BaseRequest implements RequestInterface
      * @param string $base64Data
      * @param bool $isPath
      */
-    public function setIdCardImage(string $base64Data, bool $isPath = true)
+    public function setCertification(string $base64Data, bool $isPath = true)
     {
         if ($isPath && is_readable($base64Data)) {
             $base64Data = Client::imageBase64Encode($base64Data);

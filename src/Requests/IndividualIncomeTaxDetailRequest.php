@@ -54,7 +54,7 @@ class IndividualIncomeTaxDetailRequest extends BaseRequest implements RequestInt
     /**
      * @var
      */
-    public $platformAreaCode;
+    public $platformArea;
 
     /**
      * @var
@@ -137,15 +137,15 @@ class IndividualIncomeTaxDetailRequest extends BaseRequest implements RequestInt
      * @param string $licenseNo 扣缴义务人名称（平台企业）
      * @param string string $industryCode 设置行业编码（营业执照）
      * @param string $cityCode （平台企业）-填写行政区划代码（市级），参见《行政区划代码-名称表》
-     * @param string $areaCode 街道乡镇
+     * @param string $area 街道乡镇
      */
-    public function setPlatformCompany(string $name, string $licenseNo, string $industryCode, string $cityCode, string $areaCode)
+    public function setPlatformCompany(string $name, string $licenseNo, string $industryCode, string $cityCode, string $area)
     {
         $this->params['nsrmc'] = $this->platformName = $name;
-        $this->params['nsrsbh '] = $this->platformLicenseNo = $licenseNo;
+        $this->params['nsrsbh'] = $this->platformLicenseNo = $licenseNo;
         $this->params['hy'] = $this->platformIndustryCode = $industryCode;
         $this->params['xzqh'] = $this->platformCityCode = $cityCode;
-        $this->params['jdxz'] = $this->platformAreaCode = $areaCode;
+        $this->params['jdxz'] = $this->platformArea = $area;
     }
 
 
