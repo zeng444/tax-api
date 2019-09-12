@@ -324,7 +324,8 @@ class HirerRequest extends BaseRequest implements RequestInterface
         if ($isPath && is_readable($base64Data)) {
             $base64Data = Client::imageBase64Encode($base64Data);
         }
-        $this->params['smrzfj'] = $this->idCardImage = $base64Data;
+        $this->params['smrzfj'][] = $this->idCardImage = $base64Data;
+        $this->idCardImage = $this->params['smrzfj'];
     }
 
     /**

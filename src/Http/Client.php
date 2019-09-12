@@ -253,7 +253,7 @@ class Client
             'sign' => $this->_sign->encrypt(),
             'seq' => $this->makeSeq(),
             'charset' => 'UTF-8',
-            'timestamp' => (string)time(),
+            'timestamp' => (string)date('Y-m-d H:i:s'),
             'version' => $this->version,
         ]);
         if ($request->requireToken()) {
