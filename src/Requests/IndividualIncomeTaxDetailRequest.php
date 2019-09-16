@@ -68,9 +68,12 @@ class IndividualIncomeTaxDetailRequest extends BaseRequest implements RequestInt
      */
     public function validate(): bool
     {
+        if (!$this->startDate || !$this->endDate || !$this->reportDate || !$this->platformName || !$this->platformLicenseNo || !$this->platformIndustryCode || !$this->platformCityCode || !$this->platformArea || !$this->revenueDepartment || !$this->collection) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
         return !$this->hasMessage();
     }
-
 
     /**
      * Author:Robert
@@ -101,7 +104,6 @@ class IndividualIncomeTaxDetailRequest extends BaseRequest implements RequestInt
     {
         return 'sdsxx';
     }
-
 
 
     /**
@@ -173,5 +175,4 @@ class IndividualIncomeTaxDetailRequest extends BaseRequest implements RequestInt
         }
         $this->collection[] = array_merge($this->params, $collection->getBody());
     }
-
 }

@@ -50,7 +50,10 @@ class Collection extends BaseRequest
      */
     public function validate(): bool
     {
-        //        $this->setMessage('something wrong');
+        if (!strlen($this->taxRate) || !strlen($this->peopleQuantity) || !strlen($this->taxIncomeTotal) || !strlen($this->taxPayableTotal) || !strlen($this->taxPaidTotal) || !strlen($this->taxRefundedTotal)) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
         return true;
     }
 

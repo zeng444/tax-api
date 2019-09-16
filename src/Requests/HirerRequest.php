@@ -95,10 +95,6 @@ class HirerRequest extends BaseRequest implements RequestInterface
      */
     public $holderIdNo;
 
-    /**
-     * @var
-     */
-    public $bankCardName;
 
     /**
      * @var
@@ -155,10 +151,6 @@ class HirerRequest extends BaseRequest implements RequestInterface
      */
     public $idCardImage;
 
-    /**
-     * @var
-     */
-    public $position;
 
     /**
      * @var
@@ -204,6 +196,19 @@ class HirerRequest extends BaseRequest implements RequestInterface
         return 'fwfjbxx';
     }
 
+    /**
+     * Author:Robert
+     *
+     * @return bool
+     */
+    public function validate(): bool
+    {
+        if (!$this->uuid || !$this->name || !$this->idType || !$this->idNo || !$this->mobile || !$this->gender || !$this->address || !$this->businessScope || !$this->registerDate || !$this->birthday || !$this->bankName || !$this->holder || !$this->holderIdNo || !$this->bankCardNo || !$this->ip || !$this->addressCityCode || !$this->mac || !$this->idCardImage || !$this->birthday || !$this->bankName || !$this->holder || !$this->holderIdNo || !$this->bankCardNo || !$this->ip) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
+        return true;
+    }
 
     /**
      * 注册会员所在企业信息

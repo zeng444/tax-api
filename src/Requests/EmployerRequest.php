@@ -130,6 +130,24 @@ class EmployerRequest extends BaseRequest implements RequestInterface
     }
 
     /**
+     * Author:Robert
+     *
+     * @return bool
+     */
+    public function validate(): bool
+    {
+        if (!in_array($this->companyType, ['0', '1',])) {
+            $this->setMessage('companyType应该为0或者1的字符');
+            return false;
+        }
+        if (!$this->uuid || !$this->idNo || !$this->mobile || !$this->name || !$this->countryCode || !$this->licenceNo || !$this->companyName || !$this->companyAddress || !$this->companyAddressDetail || !$this->legalPersonName || !$this->registerCapital || !$this->registerDate || !$this->cityCode || !$this->businessScope || !$this->revenueDepartment || !$this->platFormRegisterDate || !$this->licenceImg) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 设置营业执照
      * Author:Robert
      *

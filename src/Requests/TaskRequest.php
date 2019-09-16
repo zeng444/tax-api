@@ -234,6 +234,23 @@ class TaskRequest extends BaseRequest implements RequestInterface
         return 'ddxx';
     }
 
+    /**
+     * Author:Robert
+     *
+     * @return bool
+     */
+    public function validate(): bool
+    {
+        if (!$this->hirerReceiveDate || !$this->hirerReceiveDevice || !$this->paymentBrand || !$this->paymentOrderNo || !$this->paymentAccount || !$this->bankBalanceNo || !$this->hirerReceiveCityCode || !$this->hirerReceiveIp || !$this->settleDate || !$this->payeeName || !$this->payeeNameIdNo || !$this->evidenceImage || !$this->fee || !$this->industry || !$this->industryCode || !$this->cityCode || !$this->paymentType || !$this->startDate || !$this->endDate || !$this->hirerName || !$this->hirerIdNo || !$this->companyName || !$this->companyLicenseNo || !$this->publishDevice || !$this->publishDate || !$this->title || !$this->desc || !$this->sourceId || !$this->uuid || !$this->employerUuid || !$this->employerName || !$this->employerIdNo || !$this->hirerUuid || !$this->hirerIdType) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
+        if (!strlen($this->totalPrice) || !strlen($this->platformPoundage)) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
+        return true;
+    }
 
     /**
      * 发布方负责人姓名

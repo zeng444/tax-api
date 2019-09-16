@@ -18,7 +18,6 @@ class IndividualIncomeTaxRequest extends BaseRequest implements RequestInterface
     protected $collection = [];
 
 
-
     /**
      * @var
      */
@@ -57,9 +56,12 @@ class IndividualIncomeTaxRequest extends BaseRequest implements RequestInterface
      */
     public function validate(): bool
     {
+        if (!$this->startDate || !$this->endDate || !$this->collection) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
         return !$this->hasMessage();
     }
-
 
 
     /**

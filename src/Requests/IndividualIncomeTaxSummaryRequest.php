@@ -72,6 +72,10 @@ class IndividualIncomeTaxSummaryRequest extends BaseRequest implements RequestIn
      */
     public function validate(): bool
     {
+        if (!$this->collection || !$this->startDate || !$this->endDate || !$this->reportDate || !$this->companyName || !$this->companyLicenseNo) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
         return !$this->hasMessage();
     }
 
@@ -85,7 +89,6 @@ class IndividualIncomeTaxSummaryRequest extends BaseRequest implements RequestIn
     {
         return $this->collection;
     }
-
 
     /**
      * 税款所属起止

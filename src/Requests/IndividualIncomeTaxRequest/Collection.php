@@ -167,7 +167,14 @@ class Collection extends BaseRequest
      */
     public function validate(): bool
     {
-        //        $this->setMessage('something wrong');
+        if (!$this->taxPayerIdNo || !$this->taxpayerIdTypeCode || !$this->industryCode || !$this->taxpayerCountryNo || !$this->taxpayerUuid || !$this->taxCategory || !$this->taxTypeCode || !$this->taxPayer) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
+        if (!strlen($this->agentTaxChargeableTotal) || !strlen($this->taxReducedTotal) || !strlen($this->taxRate) || !strlen($this->taxBaseTotal)) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
         return true;
     }
 

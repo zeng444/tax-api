@@ -21,7 +21,7 @@ class Collection extends BaseRequest
     /**
      * @var
      */
-    public $taxPayerProvince;
+    public $taxPayerProvinceCode;
 
     /**
      * @var
@@ -95,7 +95,14 @@ class Collection extends BaseRequest
      */
     public function validate(): bool
     {
-        //        $this->setMessage('something wrong');
+        if (!$this->taxPayer || !$this->taxPayerProvinceCode || !$this->taxPayerIdType || !$this->taxPayerIdNo || !$this->taxPayerCountryCode || !$this->taxPayerMobile || !$this->uuid) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
+        if (!strlen($this->taxIncomeTotal) || !strlen($this->taxIncomeRate) || !strlen($this->taxBaseTotal) || !strlen($this->taxRate) || !strlen($this->deductedTotal) || !strlen($this->taxPayableTotal) || !strlen($this->taxPaidTotal) || !strlen($this->taxRefundedTotal)) {
+            $this->setMessage('表单填写不完整');
+            return false;
+        }
         return true;
     }
 
@@ -120,16 +127,16 @@ class Collection extends BaseRequest
      * @param string $idNo
      * @param string $taxPayerMobile
      * @param string $countryCode
-     * @param string $taxPayerProvince 自然人默认填写东疆行政区划
+     * @param string $taxPayerProvinceCode 生产经营地行政区划（至省、直辖市，取个人当年第一次申报所属行政区划）（自然人默认填写东疆行政区划）
      */
-    public function setTaxpayer(string $name, string $idType, string $idNo, string $taxPayerMobile, string $countryCode, string $taxPayerProvince)
+    public function setTaxpayer(string $name, string $idType, string $idNo, string $taxPayerMobile, string $countryCode, string $taxPayerProvinceCode)
     {
         $this->params['sfzjlx'] = $this->taxPayerIdType = $idType;
         $this->params['sfzjhm'] = $this->taxPayerIdNo = $idNo;
         $this->params['xm'] = $this->taxPayer = $name;
         $this->params['gjdq'] = $this->taxPayerCountryCode = $countryCode;
         $this->params['lxdh'] = $this->taxPayerMobile = $taxPayerMobile;
-        $this->params['scjydxzqh'] = $this->taxPayerProvince = $taxPayerProvince;
+        $this->params['scjydxzqh'] = $this->taxPayerProvinceCode = $taxPayerProvinceCode;
     }
 
 

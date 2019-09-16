@@ -24,7 +24,7 @@ abstract class BaseRequest
     /**
      * @var
      */
-    private $_message;
+    private $_message = '';
 
 
     /**

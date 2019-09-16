@@ -218,7 +218,7 @@ class PlatformInformationRequest extends BaseRequest implements RequestInterface
      */
     public function validate(): bool
     {
-        if (!$this->name || !$this->licenseNo || !$this->industryCode || !$this->revenueDepartment || !$this->revenueParentDepartment) {
+        if (!$this->name || !$this->licenseNo || !$this->industryCode || !$this->revenueDepartment || !$this->revenueParentDepartment || !$this->registerCapital || !$this->financialPersonMail || !$this->status || !$this->employeeNumber || !$this->businessScope || !$this->legalPersonIdNo || !$this->legalPersonMail || !$this->siteUrl || !$this->legalPersonTel || !$this->legalPersonMobile || !$this->address || !$this->legalPerson || !$this->financialPersonName || !$this->registerAddressCode || !$this->legalPersonIdType || !$this->financialPersonIdNo || !$this->financialPersonIdType || !$this->financialPersonTel || !$this->financialPersonMobile || !$this->street || !$this->taxPersonName || !$this->taxPersonIdType || !$this->taxPersonIdNo || !$this->taxPersonTel || !$this->taxPersonMobile || !$this->taxPersonMail) {
             $this->setMessage('表单填写不完整');
             return false;
         }
