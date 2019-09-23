@@ -203,7 +203,7 @@ class HirerRequest extends BaseRequest implements RequestInterface
      */
     public function validate(): bool
     {
-        if (!$this->uuid || !$this->name || !$this->idType || !$this->idNo || !$this->mobile || !$this->gender || !$this->address || !$this->businessScope || !$this->registerDate || !$this->birthday || !$this->bankName || !$this->holder || !$this->holderIdNo || !$this->bankCardNo || !$this->ip || !$this->addressCityCode || !$this->mac || !$this->idCardImage || !$this->birthday || !$this->bankName || !$this->holder || !$this->holderIdNo || !$this->bankCardNo || !$this->ip) {
+        if (!$this->uuid || !$this->name || !$this->idType || !$this->idNo || !$this->mobile || !$this->gender || !$this->address || !$this->businessScope || !$this->registerDate || !$this->birthday || !$this->bankName || !$this->holder || !$this->holderIdNo || !$this->bankCardNo || !$this->ip || !$this->addressCityCode || !$this->idCardImage || !$this->birthday || !$this->bankName || !$this->holder || !$this->holderIdNo || !$this->bankCardNo || !$this->ip) {
             $this->setMessage('表单填写不完整');
             return false;
         }
